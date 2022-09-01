@@ -1,0 +1,70 @@
+    1  pwd
+    2  ls /home
+    3  cd Deskt
+    4  cd Desktop
+    5  cd Downloads
+    6  cd Downloads/
+    7  cd /home/
+    8  clear
+    9  mkdir praccomp
+   10  cd smithdej16
+   11  mkdir praccomp
+   12  mkdir praccomp/
+   13  cd praccomp/
+   14  touch test.txt
+   15  ls
+   16  ls -la
+   17  ls ..
+   18  clear
+   19  ls
+   20  ls -l
+   21  ls -lah
+   22  echo $PATH
+   23  ls
+   24  less text.txt
+   25  more test.txt
+   26  less test.txt
+   27  nano test.txt
+   28  less test.txt
+   29  ls -lh
+   30  rm test.txt
+   31  ls
+   32  touch test.txt
+   33  mkdir blah
+   34  ls
+   35  rm blah
+   36  rmdir blah
+   37  ls
+   38  mkdir blah
+   39  touch blah/test2.txt
+   40  rmdir blah
+   41  cd
+   42  wget 
+   43  wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+   44  bash Miniconda3-latest-Linux-x86_64.sh 
+   45  exit
+   46  conda install mamba -c conda-forge
+   47  mamba
+   48  mamba install htop
+   49  install htop -c conda-forge
+   50  mamba install htop -c conda-forge
+   51  ls
+   52  cd praccomp
+   53  git
+   54  git clonehttps://github.com/dejsmith7/praccomp_2022.git
+   55  git clone https://github.com/dejsmith7/praccomp_2022.git
+   56  cd praccomp_2022/
+   57  ls
+   58  nano README.md
+   59  ls
+   60  git status
+   61  git add README.md 
+   62  git status
+   63  git commit -m "Added README.md"
+   64  git config --global user.email "imanixencre@gmail.com"
+   65  git config --global user.name "dejahimani"
+   66  git commit -m "Added README.md"
+   67  git status
+   68  git push
+   69  history
+   70  history > log.txt
