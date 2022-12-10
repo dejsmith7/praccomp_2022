@@ -1,0 +1,1480 @@
+---
+title: "Praccomp 2022_R tutorial"
+output:
+  html_document:
+    df_print: paged
+---
+
+# R basic
+
+## Introduction
+
+R as a calculator
+
+```{r}
+1 + 100
+```
+
+```{r}
+2^2
+```
+
+```{r}
+7/2
+```
+
+```{r}
+4-1
+```
+
+```{r}
+2*2
+```
+
+```{r}
+3+5*2
+```
+
+```{r}
+(3+5)*2
+```
+
+```{r}
+2e2
+```
+
+```{r}
+2/10000
+```
+
+```{r}
+sin(1)
+```
+
+```{r}
+log(1)
+```
+
+```{r}
+exp(0)
+```
+
+```{r}
+1 == 1
+```
+
+```{r}
+1 >= 1
+```
+
+```{r}
+1 <1
+```
+
+```{r}
+1 != 2
+```
+
+```{r}
+x <- 10
+x
+```
+
+```{r}
+x + x
+```
+
+```{r}
+x - 5 
+```
+
+```{r}
+x^2
+```
+
+```{r}
+y <- x+x
+y
+```
+
+## Vectorization
+
+```{r}
+1:5
+```
+
+```{r}
+2^(1:5)
+```
+
+```{r}
+v <- 1:5
+2^v
+```
+
+```{r}
+log10(v)
+```
+
+## Environment
+
+```{r}
+ls()
+```
+
+```{r}
+rm(v)
+ls()
+```
+
+## Package Management
+
+```{r}
+installed.packages()
+```
+
+```{r}
+install.packages("vegan", dependencies=TRUE)
+```
+
+```{r}
+library (vegan)
+```
+
+## Project Management
+
+1.  Set up management structure (i.e., "data," "src", "results," "doc")
+2.  Discuss avoiding redundancy of files
+3.  Make sure to use version control (i.e., Git)
+
+## Getting help
+
+```{r}
+?plot
+help(plot)
+?"<-"
+vignette("FAQ-vegan")
+citation("vegan")
+```
+
+## Data and their formats
+
+```{r}
+cats <- data.frame(coat = c("calico", "black", "tabby"), 
+                   weight = c(2.1,5,3.2), 
+                   likes_string = c(1,0,1))
+```
+
+```{r}
+cats
+```
+
+```{r}
+getwd()
+```
+
+```{r}
+write.csv(cats, file = "C:/Users/DNA$TY/Desktop/Grad School/Praccomp/BIOL4800_6220/data/cats.csv")
+cats <- read.csv("C:/Users/DNA$TY/Desktop/Grad School/Praccomp/BIOL4800_6220/data/cats.csv")
+cats$coat
+```
+
+```{r}
+cats$weight
+```
+
+```{r}
+cats$weight*10
+```
+
+```{r}
+log(cats$weight)
+```
+
+```{r}
+logweight <- log(cats$weight)
+cbind(cats,logweight)
+```
+
+```{r}
+cats <- cbind(cats,logweight)
+cats
+```
+
+```{r}
+paste ("My cat is ", cats$coat, ", and it weighs ", cats$weight, " kg. ", sep="")
+```
+
+### Data Types
+
+```{r}
+typeof(cats$coat)
+```
+
+```{r}
+typeof(cats$weight)
+```
+
+```{r}
+typeof(cats$likes_string)
+```
+
+```{r}
+typeof(3.14159)
+
+```
+
+```{r}
+typeof(1i)
+```
+
+```{r}
+typeof(FALSE)
+```
+
+```{r}
+typeof(TRUE)
+```
+
+```{r}
+typeof(T)
+typeof(F)
+```
+
+```{r}
+typeof(cats)
+```
+
+```{r}
+class(cats)
+```
+
+```{r}
+file.show("C:/Users/DNA$TY/Desktop/Grad School/Praccomp/BIOL4800_6220/data/cats.csv")
+```
+
+```{r}
+cats$likes_string <- as.logical(cats$likes_string)
+typeof(cats$likes_string)
+```
+
+```{r}
+cats$likes_string
+```
+
+```{r}
+c("a", "b")
+```
+
+```{r}
+ab <- c("a", "b")
+ab
+```
+
+```{r}
+c(ab,"c")
+```
+
+```{r}
+c(ab,ab)
+```
+
+```{r}
+1:10
+```
+
+```{r}
+seq(10)
+```
+
+```{r}
+z <- seq(10)
+head(z, n=3)
+```
+
+```{r}
+length(z)
+```
+
+```{r}
+class(z)
+```
+
+```{r}
+typeof(z)
+```
+
+```{r}
+seq(70,100, by=5)
+```
+
+### Data Frames
+
+```{r}
+cats
+```
+
+```{r}
+str(cats$coat)
+```
+
+```{r}
+coats<-c("tabby", "tortoiseshell", "tortoiseshell", "black", "tabby")
+coats
+```
+
+```{r}
+str(coats)
+```
+
+```{r}
+factor(coats)
+```
+
+```{r}
+categories <- factor(coats)
+class(coats)
+```
+
+```{r}
+class(categories)
+```
+
+```{r}
+str(categories)
+```
+
+### Lists
+
+```{r}
+list_example <- list(title= "Numbers", numbers = 1:10, data=TRUE)
+```
+
+```{r}
+list_example
+```
+
+```{r}
+another_list <- list(1, "a", TRUE,1+1i)
+another_list
+```
+
+```{r}
+typeof(list_example)
+```
+
+```{r}
+class(list_example)
+```
+
+```{r}
+typeof(cats)
+```
+
+```{r}
+class(cats)
+```
+
+```{r}
+data.frame(list_example)
+```
+
+```{r}
+cats
+```
+
+```{r}
+cats[,3]
+```
+
+```{r}
+cats[3,]
+
+```
+
+```{r}
+cats[2:3,c(1,3)]
+```
+
+### Matrices
+
+```{r}
+matrix_example <- matrix(0,ncol=5, nrow=3)
+matrix_example
+```
+
+```{r}
+class(matrix_example)
+```
+
+```{r}
+typeof(matrix_example)
+```
+
+```{r}
+str(matrix_example)
+```
+
+```{r}
+dim(matrix_example)
+```
+
+```{r}
+ncol(matrix_example)
+```
+
+```{r}
+nrow(matrix_example)
+```
+
+```{r}
+class(data.frame(matrix_example))
+```
+
+```{r}
+df_example <- data.frame(matrix_example)
+df_example
+```
+
+### Subsetting
+
+```{r}
+p <- c(2.3,6.9,4.0,23,1)
+p
+```
+
+```{r}
+names(p) <- c('a','b','c','d','e')
+p
+```
+
+```{r}
+p[1]
+```
+
+```{r}
+p[2:4]
+```
+
+```{r}
+p[c(1,5)]
+```
+
+```{r}
+p[c(1,1,1,3,5,5)]
+```
+
+```{r}
+p[6]
+```
+
+```{r}
+p[-3]
+```
+
+```{r}
+p[c(-1,-5)]
+```
+
+```{r}
+p[-(2:4)]
+```
+
+```{r}
+p[c('a','c')]
+```
+
+```{r}
+p[c(T,F,T,F,T)]
+```
+
+```{r}
+p[names(p) !='c']
+```
+
+### Factors
+
+```{r}
+f <-  factor(c('a', 'b', 'c', 'd', 'e'))
+f
+```
+
+```{r}
+f[f == 'a']
+```
+
+```{r}
+f[1:3]
+```
+
+```{r}
+f[f %in% c('b', 'c')]
+```
+
+```{r}
+f[-3]
+```
+
+```{r}
+f2 <- factor (c('a', 'a', 'b', 'c', 'c'))
+f2
+```
+
+```{r}
+f2[f2 == 'a']
+```
+
+```{r}
+f2[f2 %in% c('a', 'c')]
+```
+
+### Matrices Resumed
+
+```{r}
+set.seed(65)
+m <- matrix(rnorm(6*4), ncol=4, nrow=6)
+m
+```
+
+```{r}
+m[3:4, c(3,1)]
+```
+
+```{r}
+m[,c(3,4)]
+```
+
+### List Revisited
+
+```{r}
+xlist <- list(a= "BIOL48006220", b=seq(1,10, by = 0.5), data = "Grade")
+xlist
+```
+
+```{r}
+xlist[1:2]
+```
+
+```{r}
+xlist['a']
+```
+
+```{r}
+xlist[['a']]
+```
+
+```{r}
+xlist ['b']
+```
+
+```{r}
+xlist[['b']]
+```
+
+```{r}
+xlist$b
+```
+
+### Data Frames Revisted
+
+```{r}
+gp <- read.csv("C:/Users/DNA$TY/Desktop/Grad School/Praccomp/BIOL4800_6220/data/compt_plastic_wst.csv")
+
+head(gp, n=10L)
+```
+
+```{r}
+head(gp[3], n=10L)
+```
+
+```{r}
+nrow(gp)
+```
+
+```{r}
+head(gp[["country"]], 10L)
+```
+
+```{r}
+gp$X2001
+```
+
+```{r}
+gp[c(1,3), 2:5]
+```
+
+```{r}
+gp [ which(gp$X1997 <= 100 & gp$X2016 >= 100),]
+```
+
+### Conditionals and Flow
+
+```{r}
+n <- 10
+
+if (n <10) {
+    print("n is less than 10")
+}   else if (n >10) {
+    print ("n is greater than 10")
+}   else {
+    print("n is equal to 10")
+}
+```
+
+```{r}
+for (n in seq(1,20))  { 
+  if (n <10) {
+    print("n is less than 10")
+  }   else if (n >10) {
+    print ("n is greater than 10")
+  }   else {
+    print("n is equal to 10")
+  }
+}
+```
+
+```{r}
+g <- 0
+
+while (g <=10) {
+  print(paste(g, "is less than or equal to 10"))
+  g <- g+1
+}
+```
+
+## Plotting and Figures
+
+```{r}
+install.packages("ggplot2")
+```
+
+```{r}
+library(ggplot2)
+```
+
+```{r}
+gp <- read.csv("C:/Users/DNA$TY/Desktop/Grad School/Praccomp/BIOL4800_6220/data/GapminderData/data/gapminder_all.csv")
+head(gp)
+```
+
+```{r}
+ggplot(data=gp, mapping=aes(x=gdpPercap_1952, y=pop_1952)) + geom_point()
+
+```
+
+```{r}
+ggplot(data=gp, mapping=aes(x=gdpPercap_2002, y=pop_2002)) + geom_point()
+
+```
+
+```{r}
+gapminder <- read.csv("http://raw.githubusercontent.com/swcarpentry/r-novice-gapminder/gh-pages/_episodes_rmd/data/gapminder_data.csv")
+head(gapminder)
+```
+
+```{r}
+ggplot(data=gapminder, mapping=aes(x=gdpPercap, y=lifeExp)) + geom_point()
+```
+
+```{r}
+ggplot(data=gapminder, mapping=aes(x=year, y=lifeExp, by=country, color=continent)) + geom_line()
+```
+
+```{r}
+ggplot(data=gapminder, mapping=aes(x=year, y=lifeExp, by=country)) + geom_line(mapping=aes(color=continent)) + geom_point()
+```
+
+```{r}
+ggplot(data=gapminder, mapping =aes(x=gdpPercap, y=lifeExp)) + geom_point(alpha=0.5) + scale_x_log10()
+```
+
+```{r}
+ggplot(data=gapminder, mapping=aes(x=gdpPercap, y=lifeExp)) + geom_point(alpha=0.25, color="purple") + scale_x_log10() + geom_smooth(method= lm, color="gold", size=1.25)
+```
+
+```{r}
+africas <- gapminder[gapminder$continent == "Africa", ]
+head(africas)
+```
+
+```{r}
+ggplot(data=africas, mapping=aes(x=year, y=lifeExp)) + 
+  geom_line(color= "red") + 
+  facet_wrap( ~ country) +
+  theme(axis.text.x= element_text(angle = 45)) +
+  labs(
+    x = "Year",
+    y = "Life Expectancy",
+    title = "Life Expectancy Over Time in African Countries"
+  )
+```
+
+```{r}
+AfricanLifeExp <- ggplot(data=africas, mapping=aes(x=year, y=lifeExp)) + 
+  geom_line(color = "red") + 
+  facet_wrap( ~ country) +
+  theme(axis.text.x= element_text(angle = 45)) +
+  labs(
+    x = "Year",
+    y = "Life Expectancy",
+    title = "Life Expectancy Over Time in African Countries"
+  )
+```
+
+```{r}
+ggsave(filename = "C:/Users/DNA$TY/Desktop/Grad School/Praccomp/BIOL4800_6220/data/GapminderData/AfricanLifeExp.png", plot = AfricanLifeExp, width = 24, height = 40, dpi = 300, units = "cm")
+```
+
+```{r}
+pdf(file = "C:/Users/DNA$TY/Desktop/Grad School/Praccomp/BIOL4800_6220/results/AfricanLifeExp.pdf", width = 24, height = 40)
+plot(AfricanLifeExp)
+dev.off()
+```
+
+```{r}
+write.table(gapminder, file = "C:/Users/DNA$TY/Desktop/Grad School/Praccomp/BIOL4800_6220/data/gapminder_web.csv", sep=",")
+```
+
+```{r}
+write.csv(africas, file="C:/Users/DNA$TY/Desktop/Grad School/Praccomp/BIOL4800_6220/data/gapminder_web.csv")
+```
+
+## Fancy Plots
+
+```{r}
+#install.packages(c("ggridges","viridis","hrbrthemes"), dependencies = T)
+
+```
+
+```{r}
+library(ggridges)
+library(ggplot2)
+library(viridis)
+```
+
+```{r}
+library(hrbrthemes)
+```
+
+```{r}
+# Plot
+ggplot(lincoln_weather, aes(x = `Mean Temperature [F]`, y = `Month`, fill = ..x..)) +
+  geom_density_ridges_gradient(scale = 3, rel_min_height = 0.01) +
+  scale_fill_viridis(name = "Temp. [F]", option = "C") +
+  labs(title = 'Temperatures in Lincoln NE in 2016') +
+  theme_ipsum() +
+    theme(
+      legend.position="none",
+      panel.spacing = unit(0.1, "lines"),
+      strip.text.x = element_text(size = 8)
+    )
+```
+
+```{r}
+spider_data <- read.csv(file="https://wsc.nmbe.ch/resources/species_export_20221101.csv", header=TRUE)
+
+```
+
+```{r}
+spider_data <- read.csv("data/spider_data_20221101.csv")
+spider_data
+```
+
+```{r}
+install.packages(c("ggstatsplot","palmerpenguins","tidyverse"), dependencies=T)
+
+```
+
+```{r}
+library(ggstatsplot)
+```
+
+```{r}
+library (tidyverse)
+```
+
+```{r}
+data("penguins", package = "palmerpenguins")
+penguins
+```
+
+```{r}
+penguins2 <- drop_na(penguins)
+penguins2
+```
+
+```{r}
+plt <- ggbetweenstats(
+  data = penguins,
+  x = species,
+  y = bill_length_mm
+)
+```
+
+```{r}
+plt
+```
+
+```{r}
+gapminder2 <- drop(gapminder)
+```
+
+```{r}
+boxplot(gapminder2$lifeExp ~ gapminder2$continent)
+
+```
+
+```{r}
+install.packages("vioplot", dependencies = T)
+
+```
+
+```{r}
+library(vioplot)
+```
+
+```{r}
+with(gapminder2, vioplot(
+  lifeExp~continent, col = "blue"
+))
+```
+
+```{r}
+plt <- ggbetweenstats(
+  data = gapminder2,
+  x = continent,
+  y = lifeExp
+)
+```
+
+```{r}
+plt
+```
+
+```{r}
+plt2 <- plt  +
+  theme(
+    axis.ticks = element_blank(),
+    axis.line = element_line(colour = "grey50"),
+    panel.grid = element_line(color = "#b4aea9"),
+    panel.grid.minor = element_blank(),
+    panel.grid.major.x = element_blank(),
+    panel.grid.major.y = element_line(linetype = "dashed"),
+    panel.background = element_rect(fill = "#fbf9f4", color = "#fbf9f4"),
+    plot.background = element_rect(fill = "#fbf9f4", color = "#fbf9f4")
+  ) +
+  labs(
+    x = "Continent",
+    y = "Life Expectency (years)",
+    title = "Life expectency of people living on each continent"
+  )
+plt2
+
+```
+
+```{r}
+ggsave(
+  filename = "results/gapminder_lifeExpXcontinentweb-violinplot-with-ggstatsplot.png",
+  plot = plt2,
+  width = 8,
+  height = 8,
+  device = "png"
+)
+```
+
+```{r}
+install.packages("maptools")
+library(maptools)
+```
+
+```{r}
+data(wrld_simpl)
+afr<-wrld_simpl[wrld_simpl$REGION==2,]
+plot(afr)
+
+```
+
+```{r}
+levels(penguins2$species)
+
+```
+
+```{r}
+penguin_matrix <- with(penguins2, cbind(bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g))
+penguin_matrix
+```
+
+```{r}
+penguin_pca <- princomp(penguin_matrix, cor=TRUE)
+summary(penguin_pca)
+```
+
+```{r}
+loadings(penguin_pca)
+
+```
+
+```{r}
+biplot(penguin_pca, xlab=penguins2[,2])
+
+```
+
+```{r}
+penguin_pca$scores
+
+```
+
+### Statistics
+
+## Additional ways of importing/reading and manipulating data
+
+```{r}
+rand <- c(12, 54, 98, 65, 38)
+rand
+```
+
+```{r}
+sum(rand)
+```
+
+```{r}
+length(rand)
+```
+
+```{r}
+avg.rand <- sum(rand)/length(rand)
+avg.rand
+```
+
+```{r}
+mean(rand)
+```
+
+```{r}
+sort(rand)
+```
+
+```{r}
+min(rand)
+```
+
+```{r}
+max(rand)
+```
+
+```{r}
+cumsum(rand)
+```
+
+```{r}
+diff(rand)
+```
+
+```{r}
+rand [2]
+```
+
+```{r}
+rand*2
+```
+
+```{r}
+pedes <- scan()
+```
+
+### Analyses
+
+## Univariate Statistics
+
+1.  Categorical Data
+
+```{=html}
+<!-- -->
+```
+a.  Barplots
+
+```{r}
+beer <- c(3, 4, 1, 1, 3, 4, 3, 3, 1, 3, 2, 1, 2, 1, 2, 3, 2, 3, 1, 1, 1, 1, 4, 3, 1)
+length(beer)
+```
+
+```{r}
+barplot(beer)
+```
+
+```{r}
+table(beer)
+```
+
+```{r}
+barplot(table(beer), xlab="Beer", ylab="Frequency")
+```
+
+```{r}
+barplot(table(beer)/length(beer), xlab="Beer", ylab="Proportion")
+```
+
+```{r}
+pie(table(beer), main="Beer preference by students")
+
+```
+
+2.  Numerical Data
+
+```{=html}
+<!-- -->
+```
+a.  Stem-and-leaf Plots
+
+```{r}
+stem(pedes)
+```
+
+b.  Strip chart
+
+```{r}
+stripchart(pedes, method="stack")
+```
+
+3.  Measures of center
+
+```{=html}
+<!-- -->
+```
+a.  Mean
+
+```{r}
+mean(pedes)
+```
+
+```{r}
+mean(gapminder$lifeExp)
+```
+
+b.  Median
+
+```{r}
+median(pedes)
+```
+
+```{r}
+median(gapminder$lifeExp)
+```
+
+```{r}
+with(gapminder, median(lifeExp))
+```
+
+c.  Mode
+
+```{r}
+which(table(pedes) == max(table(pedes)))
+```
+
+4.  Variation
+
+```{=html}
+<!-- -->
+```
+a.  Range
+
+```{r}
+range(pedes)
+```
+
+```{r}
+diff(range(pedes))
+```
+
+b.  Variance
+
+```{r}
+var(pedes)
+```
+
+```{r}
+sd(pedes)
+```
+
+c.  IQR
+
+```{r}
+IQR(pedes)
+```
+
+d.  z-scores
+
+```{r}
+scale(pedes)
+```
+
+e.  Summary
+
+```{r}
+summary(pedes)
+```
+
+5.  Plots
+
+```{=html}
+<!-- -->
+```
+a.  Histograms
+
+```{r}
+hist(pedes, breaks = "scott")
+```
+
+```{r}
+hist(pedes, breaks = "scott", prob=TRUE)
+```
+
+```{r}
+hist(pedes, breaks = "scott", prob=TRUE)
+lines(density(pedes))
+```
+
+```{r}
+plot(density(pedes))
+```
+
+b.  Box Plots
+
+```{r}
+boxplot(pedes)
+```
+
+```{r}
+summary(pedes)
+```
+
+####Bivariate and Multivariate Statistics 1. Plotting and Regression a. Box Plotting
+
+```{r}
+spid.gen <-read.csv("C:/Users/DNA$TY/Desktop/Grad School/Praccomp/BIOL4800_6220/data/spider_genitalia.csv")
+spid.gen
+```
+
+```{r}
+boxplot(spid.gen$left.bulb ~ spid.gen$habitat)
+```
+
+c.  Linear Regression
+
+```{r}
+gen.reg <- lm(spid.gen$left.bulb ~ spid.gen$right.bulb)
+
+```
+
+```{r}
+summary(gen.reg)
+```
+
+```{r}
+plot(spid.gen$left.bulb ~ spid.gen$right.bulb)
+abline(gen.reg)
+```
+
+d.  Correlation Coefficients & Spearman Rank Correlation
+
+```{r}
+cor.gen <- with(data=spid.gen, cor(left.bulb,right.bulb)) 
+cor.gen^2
+```
+
+```{r}
+spearman.cor.gen <- with(data=spid.gen, cor(left.bulb,right.bulb, method="spearman")) 
+spearman.cor.gen^2
+```
+
+e.  Residuals
+
+```{r}
+residuals(gen.reg)
+```
+
+f.  Transformations
+
+```{r}
+plot(spid.gen$left.bulb^2~spid.gen$right.bulb)
+```
+
+2.  Comparing Discrete Treatment Effects a. Chi-squared
+
+```{r}
+obs_weighted <- c(4,15,6,15,18,2)
+obs_fair <- c(10,10,10,10,10,10)
+exp <- c(.16,.17,.16,.17,.17,.17)
+chisq.test(obs_weighted, p=exp)
+chisq.test(obs_fair, p=exp)
+```
+
+b.  T-tests
+
+```{r}
+#H0 - true mean is equal to 0, but you can set true mean to other values with mu=
+t.test(spid.gen$carapace.length)
+
+t.test(spid.gen$carapace.length, mu=29)
+```
+
+```{r}
+habitat.t2 <- t.test(spid.gen$carapace.length~spid.gen$habitat)
+habitat.t2
+```
+
+```{r}
+habitat.tless <- t.test(spid.gen$left.bulb, alternative = "less")
+habitat.tless
+```
+
+```{r}
+habitat.tgreater <- t.test(spid.gen$left.bulb, alternative = "greater")
+habitat.tgreater
+```
+
+c.  Analysis of Variance (ANOVA)
+
+```{r}
+gen.lm <- lm(spid.gen$left.bulb ~ spid.gen$habitat)
+summary(gen.lm)
+```
+
+```{r}
+anova(gen.lm)
+```
+
+```{r}
+gen.anova <- aov(spid.gen$left.bulb~spid.gen$habitat)
+summary(gen.anova)
+```
+
+```{r}
+gapminder.lifeexpectancy.continent.anova <- aov(gapminder2$lifeExp~gapminder2$continent)
+summary(gapminder.lifeexpectancy.continent.anova)
+```
+
+```{r}
+gapminder.tukey.two.way <- TukeyHSD(gapminder.lifeexpectancy.continent.anova)
+gapminder.tukey.two.way
+```
+
+d.  Analysis of Co-Variance (ANCOVA)
+
+```{r}
+boxplot(spid.gen$left.bulb~spid.gen$habitat)
+```
+
+```{r}
+gen.ancova <- lm(spid.gen$left.bulb~spid.gen$habitat*spid.gen$carapace.length)
+summary(gen.ancova)
+```
+
+```{r}
+gapminder.lifeexp.continent_GDP.ancova <- lm(gapminder2$lifeExp~gapminder2$continent+gapminder2$gdpPercap)
+summary(gapminder.lifeexpectancy.continent_GDP.ancova)
+```
+
+```{r}
+TukeyHSD(gapminder.lifeexp.continent_GDP.ancova)
+```
+
+#above is tbd
+
+3.  Principal Component Analysis
+
+```{r}
+sp.matrix <- with(spid.gen, cbind(left.bulb,right.bulb,carapace.length,leg4.length))
+sp.matrix
+```
+
+```{r}
+sp.pca <- princomp(sp.matrix, cor=TRUE)
+summary(sp.pca)
+```
+
+```{r}
+loadings(sp.pca)
+```
+
+```{r}
+biplot(sp.pca)
+```
+
+```{r}
+
+```
+
+```{r}
+install.packages("ggfortify", dependencies = T)
+library(ggfortify)
+sp.pca.plot <- autoplot(sp.pca,
+                        data = spid.gen,
+                        colour = 'habitat')
+sp.pca.plot
+```
+
+```{r}
+plot(1:25, rep(0.25,25), pch=1:25, col=1:25, ylim=c(0,6), cex=2, ylab="Line types (lty) 1 to 6", xlab="Plotting character (pch) 1 to 25 and colours (col) 1 to 8", main="Line types (lty), plotting characters (pch),\nand colors (col) for plot and xyplot", lab=c(25,7,2))
+```
+
+```{r}
+#additional command line reference for pdf save to local folder below
+pdf(./results)
+
+points(1:8, rep(0.5,8), pch=20, col=1:8, cex=3)
+
+abline(h=1:6, lty=1:6, col=1:6, lwd=5)
+```
+
+## Looping and Conditionals
+
+a.  If then statements
+
+```{r}
+x <- 5
+if (x > 0) {
+  print ("Positive Number")
+} else if (x < 0) {
+  print ("Negative Number")
+} else
+  print ("Zero")
+
+```
+
+```{r}
+a <- c(5,7,2,9)
+ifelse(a %% 2 == 0, "even", "odd")
+```
+
+b.  For loops
+
+```{r}
+z <- c(2,5,3,9,8,11,6)
+count <- 0
+
+for (val in z) {
+  if(val %% 2 == 0) count= count+1
+}
+print(count)
+```
+
+c.  While statement
+
+```{r}
+i <- 1
+while (i<5) {
+  print (i)
+  i = i+1
+}
+```
+
+d.  Interruptions
+
+```{r}
+x <- 1:5
+
+for (val in x) {
+  if (val == 3) {
+    break
+}
+    print(val)
+}
+```
+
+```{r}
+x <- 1:5
+for (val in x ) {
+  if (val==3) {
+    next
+  }
+  print(val)
+}
+```
+
+```{r}
+x <- 1
+repeat {
+  print(x)
+  x= x+1
+  if (x == 20) {
+    break
+  }
+}
+
+```
+
+## Randomization and dataset management (short)
+
+a.  data set management
+
+```{r}
+B <- matrix(
+  c(2,4,3,1,5,87),
+  nrow=3,
+  ncol=2
+)
+
+B
+```
+
+```{r}
+t(B)
+```
+
+```{r}
+C <- matrix(
+  c(7,4,2),
+  nrow = 3,
+  ncol = 1
+)
+C
+```
+
+```{r}
+BC <- cbind(B,C)
+
+BC
+```
+
+```{r}
+c(B)
+```
+
+b.  Randomization
+
+```{r}
+# rnorm(n,mean,sd)
+# sample(x,size, replace = FALSE, prob = NULL)
+```
+
+```{r}
+ndist <- rnorm(100, 50, 10)
+ndist
+```
+
+```{r}
+mean(ndist)
+sd(ndist)
+```
+
+```{r}
+hist(ndist)
+```
+
+```{r}
+sample(ndist, 10)
+```
+
+```{r}
+test <- 1:100
+test
+```
+
+```{r}
+sample(test, 50, replace = FALSE)
+```
+
+```{r}
+sample(test, 50, replace = TRUE)
+```
